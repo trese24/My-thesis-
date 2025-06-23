@@ -1,0 +1,77 @@
+<link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+<main>
+    <header class="sticky-top">
+        <div class="d-flex justify-content-between">
+            <div id="header-title" class="d-flex justify-content-between w-100">
+                <h3>Honors</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="shadow-sm px-3 py-4 bg-white mb-3">
+        <div class="d-flex justify-content-between">
+            <div class="dash-title fs-5">Candidate for Academic Honors</div>
+            <div>
+                <select class="form-select mb-3 w-auto" id="academicHonorSelect">
+                    <option value="All" selected>All</option>
+                    <option value="Summa Cum Laude">Summa Cum Laude</option>
+                    <option value="Magna Cum Laude">Magna Cum Laude</option>
+                    <option value="Cum Laude">Cum Laude</option>
+                </select>
+            </div>
+        </div>
+        <table class="table display compact table-sm table-striped text-center" id="academicHonorTable" style="font-size: 14px;">
+            <thead>
+                <tr>
+                    <th class="text-center">Student No.</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Section</th>
+                    <th class="text-center">Award</th>
+                    <th class="text-center">Grade</th>
+                    <th class="text-center">Equiv</th>
+                </tr>
+            </thead>
+            <tbody id="academicHonorsTableContent">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="shadow-sm px-3 py-4 bg-white mb-3">
+        <div class="d-flex justify-content-between">
+            <div class="dash-title fs-5">Candidate for Academic Excellence Award</div>
+            <div>
+                <select class="form-select mb-3 w-auto" id="academicExcellenceSelect">
+                    <option value="All" selected>All</option>
+                    <option value="President's List">President's List</option>
+                    <option value="Dean's List">Dean's List</option>
+                </select>
+            </div>
+        </div>
+        <table class="table display compact table-sm table-striped text-center" id="academicExcellenceTable" style="font-size: 14px;">
+            <thead>
+                <tr class="text-center">
+                    <th class="text-center">Student No.</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Level</th>
+                    <th class="text-center">Section</th>
+                    <th class="text-center">Award</th>
+                    <th class="text-center">Grade</th>
+                    <th class="text-center">Equiv</th>
+                </tr>
+            </thead>
+            <tbody id="academicExcellenceContent">
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+<script src="../honors/script.honors.js"></script>

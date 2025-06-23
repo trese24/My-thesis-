@@ -1,0 +1,52 @@
+<main>
+    <link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+    <header>
+        <div id="header-title" class="h3">Criteria</div>
+    </header>
+    <!-- <div class="alert bg-light" id="error"></div> -->
+    <div class="shadow-sm p-3 bg-white" style="width: 400px;">
+        <form id="criteriaForm">
+            <div class="row d-flex align-items-center mb-3 g-2" id="listOfCriteria">
+
+            </div>
+            <div class="alert alert-success text-center py-1" role="alert" id="alertSuccess">
+                Save Successfully
+            </div>
+            <div class="alert alert-danger text-center py-1" role="alert" id="alertError">
+                Total equivalent must be equal to 100%
+            </div>
+            <button type="button" class="btn btn-warning btn-sm px-3" id="addCriteria">Add New Criteria</button>
+            <input type="button" class="btn btn-dark w-100 mt-3" id="saveBtn" value="Save Changes">
+        </form>
+    </div>
+</main>
+
+<!-- DELETE CRITERIA MODAL -->
+<div class="modal fade py-5" tabindex="-1" id="confirmationModal">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body p-4 text-center">
+                <h5 class="">Remove <span class="removeName"></span></h5>
+                <p class="mb-1">Are you sure you want to remove criteria <span class="h5 removeName"></span>?</p>
+                <p class="mb-0 text-danger fw-bolder">*This action is cannot be undone!</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" id="remove-yes-btn" data-id="0"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                    data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div><!-- END OF DELETE CRITERIA MODAL -->
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+<script src="../criteria/script.criteria.js"></script>

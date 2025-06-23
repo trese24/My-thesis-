@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="../dashboard/style.dashboard.css">
+<main>
+    <header>
+        <div id="header-title" class="h3">Dashboard</div>
+    </header>
+    <div class="progress mb-3 me-2">
+        <div id="studentProgress" class="progress-bar bg-warning progress-bar-striped progress-bar-animated"
+            role="progressbar" style="width: 75%"></div>
+    </div>
+    <div id="hasHonor" class="text-bg-dark py-1 px-3 mb-2 mx-1 rounded">
+        <div class="d-flex justify-content-start align-items-center">
+            <div>
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_kfl4ksd9.json"
+                    background="transparent" speed="1" style="width: 100px; height: 100px;" loop autoplay>
+                </lottie-player>
+            </div>
+            <div>
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Libre+Baskerville:wght@700&display=swap"
+                    rel="stylesheet">
+                <h5 class="" style="font-family: 'Dancing Script', cursive;">Congratulations</h5>
+                <h3 id="academicHonor" style="font-family: 'Libre Baskerville', serif;">Summa Cum Laude</h3>
+            </div>
+        </div>
+    </div>
+    <div id="qoute" class="text-bg-dark py-1 px-3 mb-2 mx-1 rounded d-flex justify-content-start align-items-center">
+        <i class="fas fa-quote-left display-4 text-muted"></i>
+        <blockquote class="blockquote"><p>A little progress each day adds up to big results. - Satya Nani</p></blockquote>
+    </div>
+    <div class="row gx-2 mx-0 mb-2">
+        <div class="col">
+            <div class="shadow-sm bg-white py-4 px-3 d-flex justify-content-between">
+                <div class="dash-title">GWA</div>
+                <div id="gwa-equiv" class="h2 fw-bold mt-1 text-end">
+                    1.25
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="shadow-sm bg-white py-4 px-3 d-flex justify-content-between">
+                <div class="dash-title">Equivalent</div>
+                <div id="gwa-grade" class="h2 fw-bold mt-1 text-end">
+                    90.00
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="shadow-sm bg-white py-4 px-3 d-flex justify-content-between">
+                <div class="dash-title">Remarks</div>
+                <div id="gwa-remarks" class="h2 fw-bold mt-1 text-end">
+                    PASSED
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gx-2 mx-0 mb-2">
+        <div class="col-4">
+            <div class="shadow-sm bg-white pb-2 pt-4 px-3">
+                <div class="dash-title">Grade per year level</div>
+                <div class="" style="height: 250px;">
+                    <!-- CHART #1: GRADE PER YEAR LEVEL -->
+                    <canvas id="chart1"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="shadow-sm bg-white pb-2 pt-4 px-3">
+                <div class="d-flex justify-content-between">
+                    <div class="dash-title">Grade per Subject</div>
+                    <div>
+                        <select class="form-select form-select-sm w-auto" id="year_sem">
+                            <option value="1" selected>1ST YEAR</option>
+                            <option value="2">2ND YEAR</option>
+                            <option value="3">3RD YEAR</option>
+                            <option value="4">4TH YEAR</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="m-0" style="height: 250px;">
+                    <!-- CHART #2: GRADE PER SUBJECT -->
+                    <canvas id="chart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../dashboard/script.dashboard.js"></script>

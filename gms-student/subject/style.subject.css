@@ -1,0 +1,8 @@
+/* #subject_tdata > tr {
+    cursor: pointer;
+} */
+
+th.dt-center,
+td.dt-center {
+    text-align: center;
+}

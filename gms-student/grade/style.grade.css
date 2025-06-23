@@ -1,0 +1,16 @@
+td,th {
+    vertical-align: middle !important;
+}
+
+[contenteditable='true'] {
+    cursor: pointer;
+}
+
+.accordion-button::after {
+    margin-left: 0 !important;
+}
+
+.lock-btn.active {
+    background-color: rgb(170, 170, 170) !important;
+    color: black;
+}

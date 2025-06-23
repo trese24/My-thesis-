@@ -1,0 +1,519 @@
+<link rel="stylesheet" href="../student/style.student.css">
+<main>
+
+    <script>
+        function convertToUppercase(element) {
+            element.value = element.value.toUpperCase();
+        }
+    </script>
+    <header class="">
+        <div id="header-title" class="d-flex justify-content-between">
+            <h3>Student</h3>
+            <div class="btn-group d-print-none" role="group">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><button class="dropdown-item" id="promote">Promote</button></li>
+                        <li><button class="dropdown-item" id="demote">Demote</button></li>
+                      
+                        <li><button class="dropdown-item" onclick="window.print()">Print</button></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add
+                    New Student</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mx-3" id="studentList">
+        <div id="error"></div>
+
+        <div class="py-3 mt-3">
+            <h5>Filter</h5>
+            <div class="row row-cols-4 g-2">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="filter-level" class="form-label">Year Level</label>
+                        <select class="form-select mb-3" name="filter-level" id="filter-level" required>
+                            <option value="All" selected>All</option>
+                            <option value="1ST YEAR">1st Year</option>
+                            <option value="2ND YEAR">2nd Year</option>
+                            <option value="3RD YEAR">3rd Year</option>
+                            <option value="4TH YEAR">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="filter-section" class="form-label">Section</label>
+                        <select class="form-select mb-3" name="filter-section" id="filter-section" required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-light shadow-sm table-bordered table-striped table-hover display compact"
+            id="studentsTable">
+            <thead>
+                <tr>
+                    <th>Student No</th>
+                    <th>Full Name</th>
+                    <th>Section</th>
+                    <th>School Year</th>
+                    <th>Email</th>
+                    <th>Contact No</th>
+                </tr>
+            </thead>
+            <tbody id="studentRecords">
+
+            </tbody>
+        </table>
+
+        <div class="my-5">
+            <h3>Alumni Student <span class="spinner-border spinner-border-sm" id="alumniSpinner" role="status"></span>
+            </h3>
+            <table class="table table-light shadow-sm table-bordered table-striped table-hover display compact"
+                id="alumniStudentsTable">
+                <thead>
+                    <tr>
+                        <th>Student No</th>
+                        <th>Full Name</th>
+                        <th>Section</th>
+                        <th>School Year</th>
+                        <th>Email</th>
+                        <th>Contact No</th>
+                    </tr>
+                </thead>
+                <tbody id="alumniStudentRecords">
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="my-5">
+            <h3>Drop Student</h3>
+            <table class="table table-light shadow-sm table-bordered table-striped table-hover display compact"
+                id="blockedStudentsTable">
+                <thead>
+                    <tr>
+                        <th>Student No</th>
+                        <th>Full Name</th>
+                        <th>Section</th>
+                        <th>School year</th>
+                        <th>Email</th>
+                        <th>Contact No</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="blockedStudentRecords">
+
+                </tbody>
+            </table>
+            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="alert"
+                    aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body"></div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-light p-3 d-none" id="studentDetails">
+        <button class="btn btn-dark px-3 d-print-none" id="backBtn"><i class="fas fa-long-arrow-left"></i></button>
+        <div class="px-4">
+            <div class="row d-flex align-items-center">
+                <div class="col-3 d-print-none">
+                    <img id="view_profile" src="../../images/defaultUserImage.jpg"
+                        class="img-fluid rounded-circle border p-2">
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="mb-2"><span id="view-fullName"></span></h2>
+                        <div class="dropdown d-print-none">
+                            <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><button class="dropdown-item" onclick="window.print()"><i class="fal fa-print"></i>
+                                        Print</button></li>
+                                <li><button class="dropdown-item" data-bs-target="#editStudentModal"
+                                        data-bs-toggle="modal"><i class="fal fa-edit"></i> Edit</button></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><button class="dropdown-item" data-bs-target="#removeStudentModal"
+                                        data-bs-toggle="modal"><i class="fal fa-trash"></i> Remove</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col">
+                            <div class="mb-1"><i class="fal fa-hashtag me-2"></i> <span id="view-studentNo"></span>
+                            </div>
+                            <div class="mb-1"><i class="fal fa-envelope me-2"></i> <span id="view-email"></span></div>
+                            <div class="mb-1"><i class="far fa-phone-alt me-2"></i> <span id="view-contactNo"></span>
+                            </div>
+                            <div class="mb-1"><i class="fad fa-venus-mars me-2"></i> <span id="view-gender"></span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mx-3 fs-5">
+                                Grade: <span id="finalGrade" class="fw-bold badge text-bg-light"></span>
+                            </div>
+                            <div class="mx-3 fs-5">
+                                Equiv: <span id="finalEquiv" class="fw-bold badge text-bg-light"></span>
+                            </div>
+                            <div class="mx-3 fs-5">
+                                Remarks: <span id="finalRemarks" class="fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-4 g-2 my-3">
+                        <div class="col"><b>Schoolyear: </b></div>
+                        <div class="col" id="view-specialization"></div>
+                        <div class="col"><b>Program:</b></div>
+                        <div class="col" id="view-program"></div>
+                        <div class="col"><b>Level:</b></div>
+                        <div class="col" id="view-level"></div>
+                        <div class="col"><b>Class Section:</b></div>
+                        <div class="col" id="view-section"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr>
+        <div>
+            <div class="d-flex justify-content-between">
+                <h3>Grades</h3>
+                <div class="mb-3" style="width: auto;">
+                    <select class="form-select" id="year_sem">
+                        <option value="1-1" selected>1ST YEAR - 1ST SEMESTER</option>
+                        <option value="1-2">1ST YEAR - 2ND SEMESTER</option>
+                        <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                        <option value="2-1">2ND YEAR - 1ST SEMESTER</option>
+                        <option value="2-2">2ND YEAR - 2ND SEMESTER</option>
+                        <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                        <option value="3-1">3RD YEAR - 1ST SEMESTER</option>
+                        <option value="3-2">3RD YEAR - 2ND SEMESTER</option>
+                        <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                        <option value="4-1">4TH YEAR - 1ST SEMESTER</option>
+                        <option value="4-2">4TH YEAR - 2ND SEMESTER</option>
+                    </select>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-center" id="gradeSpinner">
+                <strong>Fetching grades...</strong>
+                <div class="spinner-border ms-3" role="status" aria-hidden="true"></div>
+            </div>
+            <div class="accordion accordion-flush" id="gradesAccordion">
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- File Upload Modal -->
+<form id="fileUploadForm" enctype="multipart/form-data">
+    <input type="file" name="fileUpload" id="fileUpload" accept=".xlsx, .xls, .csv" class="d-none">
+</form>
+<div class="modal fade" id="fileUploadModal" tabindex="-1" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileUploadModalLabel">Excel Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="previewSpinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="container-fluid" id="fileUploadBody">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="upload"><span id="updloadLabel">Upload</span> <span
+                        class="spinner-border spinner-border-sm" id="uploadSpinner" role="status"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Student Modal -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-target="#addStudentModal"
+                    data-bs-toggle="modal"></button>
+            </div>
+            <form id="addStudentForm">
+                <div class="modal-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-firstName" class="form-label">* First Name</label>
+                             <input type="text" class="form-control" name="add-middleName" id="add-middleName" oninput="convertToUppercase(this)">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-middleName" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" name="add-middleName" id="add-middleName" oninput="convertToUppercase(this)">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-lastName" class="form-label">* Last Name</label>
+                                <input type="text" class="form-control" name="add-middleName" id="add-middleName" oninput="convertToUppercase(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-email" class="form-label">* Email address</label>
+                                <input type="email" class="form-control" name="add-email" id="add-email" required email>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-contactNo" class="form-label">Contact Number</label>
+                                <input type="text" class="form-control" name="add-contactNo" id="add-contactNo">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="male" class="form-label">* Gender</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="add-gender" id="male"
+                                        value="Male" required>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="add-gender" id="female"
+                                        value="Female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-studentNo" class="form-label">* Student Number</label>
+                                <input type="text" class="form-control" name="add-studentNo" id="add-studentNo"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-specialization" class="form-label">* School Year</label>
+                                <input type="text" class="form-control mb-3" name="add-specialization" id="add-specialization" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-program" class="form-label">* Program</label>
+                                <input type="text" class="form-control" name="add-program" id="add-program" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-level" class="form-label">* Year Level</label>
+                                <select class="form-select mb-3" name="add-level" id="add-level" required>
+                                    <option value="1st Year" selected>1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                    <option value="4th Year">4th Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-section" class="form-label">* Class Section</label>
+                                <input type="text" class="form-control" name="add-section" id="add-section" required>
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                            <div class="mb-3">
+                                <label for="add-subjects" class="form-label">* Subjects</label>
+                                <input type="text" class="form-control" name="add-subjects" id="add-subjects" required
+                                    email>
+                                <div class="form-text">Subject Code (Separeted with comma)</div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="alert alert-danger py-1 mt-2" role="alert" id="addNewStudentError">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#addStudentModal"
+                        data-bs-toggle="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="addStudentBtn"><span id="addLabel">Add New
+                            Student</span> <span class="spinner-border spinner-border-sm" id="addStudentSpinner"
+                            role="status"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE STUDENT MODAL -->
+<div class="modal fade py-5" tabindex="-1" id="removeStudentModal">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body p-4 text-center">
+                <h5 class="">Remove <span id="remove-fullName"></span></h5>
+                <p class="mb-1">Are you sure you want to remove student <span id="remove-studentNo" class="h5"></span>?
+                </p>
+                <p class="mb-0 text-danger fw-bolder">*This action is cannot be undone!
+                </p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" id="remove-yes-btn"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                    data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div><!-- END OF DELETE STUDENT MODAL -->
+
+<!-- Edit Student Modal -->
+<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Student</h5>
+                <button type="button" class="btn-close" data-bs-target="#editStudentModal"
+                    data-bs-toggle="modal"></button>
+            </div>
+            <form id="editStudentForm">
+                <input type="hidden" name="edit-oldStudentNo" id="edit-oldStudentNo">
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col col-md-4">
+                            <div class="mb-3">
+                                <label for="edit-studentNo" class="form-label">* Student Number</label>
+                                <input type="text" class="form-control" name="edit-studentNo" id="edit-studentNo">
+                            </div>
+                        </div>
+                        <div class="col col-md-8">
+                            <div class="mb-3">
+                                <label for="edit-fullName" class="form-label">* Full Name</label>
+                                    <input type="text" class="form-control" name="edit-fullName" id="edit-fullName"
+                                    required required oninput="convertToUppercase(this)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-email" class="form-label">* Email address</label>
+                                <input type="email" class="form-control" name="edit-email" id="edit-email" required
+                                    email>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-contactNo" class="form-label">Contact Number</label>
+                                <input type="text" class="form-control" name="edit-contactNo" id="edit-contactNo">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="male" class="form-label">* Gender</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edit-gender" id="male"
+                                        value="Male" required>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edit-gender" id="female"
+                                        value="Female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-4 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-specialization" class="form-label">* Shool Year</label>
+                                <input type="text" class="form-control mb-3" name="add-specialization" id="add-specialization" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-program" class="form-label">* Program</label>
+                                <input type="text" class="form-control" name="edit-program" id="edit-program" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-level" class="form-label">* Year Level</label>
+                                <select class="form-select mb-3" name="edit-level" id="edit-level" required>
+                                    <option value="1st Year" selected>1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                    <option value="4th Year">4th Year</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-section" class="form-label">* Class Section</label>
+                                <input type="text" class="form-control" name="edit-section" id="edit-section" required>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row g-2">
+                        
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="edit-subjects" class="form-label">* Subjects</label>
+                                <input type="text" class="form-control" name="edit-subjects" id="edit-subjects" required>
+                                <div class="form-text">Subject Code (Separeted with comma)</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="alert alert-danger pt-1" role="alert" id="editNewStudentError">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#editStudentModal"
+                        data-bs-toggle="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="editStudentBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../student/script.student.js"></script>

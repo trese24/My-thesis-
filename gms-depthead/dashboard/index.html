@@ -1,0 +1,152 @@
+<main>
+    <link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+    <header>
+        <div id="header-title" class="h3">Dashboard</div>
+    </header>
+    <!-- <div id="errorLog" class="alert bg-danger"></div> -->
+    <div class="row gx-2 mx-0 mb-2">
+        <div class="col-auto h-100">
+            <div class="shadow-sm px-3 py-4 bg-white mb-2">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="dash-title">Number of Student</div>
+                        <div id="studentCount" class="h1 fw-bold mt-1">
+                            0
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="ms-auto" style="width: 100px;">
+                            <!-- CHART #1: NUMBER OF STUDENT PER  YEAR LEVEL -->
+                            <canvas id="chart1"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="shadow-sm px-3 py-4 bg-white">
+                <div class="row h-100">
+                    <div class="mt-2">
+                        <div class="dash-title">Passing Rate per Year Level</div>
+                        <div class="" style="height: 150px; width: 350px;">
+                            <!-- CHART #2: PASSING RATE PER YEAR LEVEL -->
+                            <canvas id="chart2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="shadow-sm px-3 py-4 bg-white h-100">
+                <div class="row">
+                    <div class="mt-2">
+                        <div class="dash-title">Gender Passing Rate per Year Level</div>
+                        <div class="" style="height: 300px;">
+                            <!-- CHART #4: Gender Passing Rate -->
+                            <canvas id="chart4"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow-sm px-3 py-4 bg-white mb-2">
+        <div class="d-flex justify-content-between">
+            <div class="dash-title">Passing Rate per Subject <div class="spinner-border spinner-border-sm" role="status"
+                    id="chart3Spinner">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            <div>
+                <select class="form-select mb-3 w-auto" id="year_sem">
+                    <option value="1" selected>1ST YEAR</option>
+                    <option value="2">2ND YEAR</option>
+                    <option value="3">3RD YEAR</option>
+                    <option value="4">4TH YEAR</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="height: 200px;">
+            <!-- CHART #3: PASSING RATE PER SUBJECT -->
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+
+    <div class="row gx-2 mx-0 mb-2">
+        <div class="col h-100">
+            <div class="shadow-sm px-3 py-4 bg-white mb-2">
+                <div class="dash-title">Candidate for Academic Honors</div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row row-cols-2 gy-4 h6">
+                            <div class="col-8">Summa Cum Laude</div><div id="summaCumLaudeCtr" class="col-4">45</div>
+                            <div class="col-8">Magna Cum Laude</div><div id="magnaCumLaudeCtr" class="col-4">45</div>
+                            <div class="col-8">Cum Laude</div><div id="cumLaudeCtr" class="col-4">45</div>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="ms-auto" style="width: 140px;">
+                            <!-- CHART #5: NUMBER OF CANDIDATE FOR ACADEMIC HONORS -->
+                            <canvas id="chart5"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col h-100">
+            <div class="shadow-sm px-3 py-4 bg-white mb-2">
+                <div class="dash-title">Candidate for Excellence Award</div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row row-cols-2 gy-4 h6">
+                            <div class="col-8">President's List</div><div id="presidentListCtr" class="col-4">45</div>
+                            <div class="col-8">Dean's List</div><div id="deansListCtr" class="col-4">45</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="ms-auto" style="width: 140px;">
+                            <!-- CHART #6: NUMBER OF CANDIDATE FOR ACADEMIC EXCELLENCE AWARD -->
+                            <canvas id="chart6"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow-sm pt-4 pb-3 px-3 bg-white">
+        <div class="dash-title">Unofficial Drop Student</div>
+        <table class="table table-sm table-stripped table-bordered text-center compact display" style="font-size: 14px;"
+            id="dropStudentTable">
+            <thead class="table-red">
+                <tr>
+                    <th class="text-center">Student No.</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Subject Code</th>
+                    <th class="text-center">Subject Description</th>
+                    <th class="text-center">Section</th>
+                    <th class="text-center">Grade</th>
+                    <th class="text-center">Equiv</th>
+                </tr>
+            </thead>
+            <tbody id="dropStudentContent">
+
+            </tbody>
+        </table>
+    </div>
+    <footer class="bg-dark p-4 mt-3"></footer>
+</main>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../dashboard/script.dashboard.js"></script>

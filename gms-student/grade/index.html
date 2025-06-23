@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="../grade/style.grade.css">
+<link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+<main>
+    <header class="sticky-top">
+        <div id="header-title" class="d-flex align-items-center">
+            <h3 class="me-auto">Grade</h3>
+            <div class="mx-3 fs-5">
+                Grade: <span id="finalGrade" class="fw-bold badge text-bg-light"></span>
+            </div>
+            <div class="mx-3 fs-5">
+                Equiv: <span id="finalEquiv" class="fw-bold badge text-bg-light"></span>
+            </div>
+            <div class="mx-3 fs-5">
+                Remarks: <span id="finalRemarks" class="fw-bold"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mb-3" style="width: 400px;">
+        <label for="year_sem" class="fw-bold">Year and Semester</label>
+        <select class="form-select" id="year_sem">
+            <option value="1-1" selected>1ST YEAR - 1ST SEMESTER</option>
+            <option value="1-2">1ST YEAR - 2ND SEMESTER</option>
+            <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+            <option value="2-1">2ND YEAR - 1ST SEMESTER</option>
+            <option value="2-2">2ND YEAR - 2ND SEMESTER</option>
+            <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+            <option value="3-1">3RD YEAR - 1ST SEMESTER</option>
+            <option value="3-2">3RD YEAR - 2ND SEMESTER</option>
+            <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+            <option value="4-1">4TH YEAR - 1ST SEMESTER</option>
+            <option value="4-2">4TH YEAR - 2ND SEMESTER</option>
+        </select>
+    </div>
+
+    <div class="accordion accordion-flush" id="gradesAccordion">
+
+    </div>
+
+    <div id="error" class="alert alert-danger d-none"></div>
+
+</main>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../grade/script.grade.js"></script>

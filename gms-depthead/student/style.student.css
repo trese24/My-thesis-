@@ -1,0 +1,4 @@
+#studentRecords > tr, #alumniStudentRecords > tr {
+    cursor: pointer;
+}
+

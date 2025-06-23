@@ -1,0 +1,357 @@
+<!doctype HTML>
+<html>
+
+<head>
+    <title>CvSU Silang Campus</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="include/main.style.css">
+    <link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            /* color: white; */
+            margin-bottom: 10px;
+            background-color: #080808;
+            background-image: url("images/bg.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .glass-effect {
+
+            background-image: linear-gradient(32deg, rgb(50, 172, 90), rgba(58, 230, 15, 0));
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+        }
+
+        .form-signin {
+            max-width: 330px;
+            padding: 15px;
+        }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        .form-signin input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .area {
+            /* background: #4e54c8; */
+            /* background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8); */
+            width: 100%;
+            height: 100vh;
+
+
+        }
+
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(249, 227, 179, 0.2);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+
+        }
+
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+
+
+        @keyframes animate {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="area">
+        
+    </div> -->
+    <div class="d-flex align-items-center vh-100 glass-effect area">
+        <main class="form-signin w-100 m-auto text-center">
+            <form id="loginForm">
+                <div class="text-light">
+                    <img src="images/BG2.png" alt="cvsu-logo" class="mx-auto" width="300 px">
+                    <div class="mb-3 h5 fw-bold">GRADING SYSTEM</div>
+                    <div class="btn-group w-100 my-2" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="userType" id="btnradio2" value="student"
+                            autocomplete="off" checked>
+                        <label class="btn btn-outline-warning" for="btnradio2">Student</label>
+                        <input type="radio" class="btn-check" name="userType" id="btnradio1" value="faculty"
+                            autocomplete="off">
+                        <label class="btn btn-outline-warning" for="btnradio1">Faculty</label>
+                    </div>
+                </div>
+
+                <div class="form-floating text-dark">
+                    <input type="text" class="form-control" id="username" name="username"
+                        placeholder="name@example.com">
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating text-dark">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    <label for="password">Password</label>
+                </div>
+
+                <button type="button" class="btn btn-link link-light text-decoration-none" data-bs-toggle="modal"
+                    data-bs-target="#forgotPasswordModal">
+                    Forgot Password
+                </button>
+                <div class="alert alert-danger my-1 p-2" role="alert" id="errorAlert">
+                </div>
+                <button class="w-100 btn btn-lg btn-warning my-2" type="submit">Sign in</button>
+                <p class="mt-3 text-light">CVSU Silang &copy; 2023</p>
+            </form>
+        </main>
+        <div class="fixed-bottom m-0">
+            <a href="gms-admin" class="text-decoration-none text-light"><i class="fal fa-shield"></i></a>
+        </div>
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="forgotPasswordForm" class="text-dark">
+                    <div class="modal-body">
+                        <p>Enter your <span class="fw-bold text-uppercase">REGISTERED <span id="modalUserType"></span>
+                                EMAIL</span></p>
+                        <p>We will send to your new password to your email.</p>
+                        <input type="email" name="fpEmail" id="fpEmail" class="form-control"
+                            placeholder="Registered Email" required>
+                        <div class="alert alert-danger my-1" role="alert" id="errorAlertFP">
+                            You have entered unregistered email address!
+                        </div>
+                        <div class="alert alert-success my-1" role="alert" id="successAlertFP">
+                            Your new password has been sent to your email address
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success" id="forgotbtn">
+                            Send Email
+                            <div id="fPSpinner" class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $("#fPSpinner").hide();
+            $("#errorAlert").hide();
+            $("#errorAlertFP").hide();
+            $("#successAlertFP").hide();
+
+            $('#forgotPasswordModal').on('show.bs.modal', function (e) {
+                let userType = $("[name='userType']:checked").val();
+                $("#errorAlertFP").hide();
+                $("#successAlertFP").hide();
+                $("#modalUserType").html(userType);
+                $("#forgotPasswordForm").trigger("reset");
+            })
+
+            $("#loginForm").submit(function (event) {
+                event.preventDefault();
+                let userType = $("[name='userType']:checked").val();
+                var data = $(this).serializeArray();  // Form Data
+                data.push({ name: 'login', value: userType });
+                $.ajax({
+                    type: "POST",
+                    url: "process/general.process.php",
+                    data: data,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $("#errorAlert").fadeOut();
+                        if (response.status) {
+                            window.location.href = 'gms-' + userType + '/main?url=dashboard';
+                        } else {
+                            $("#errorAlert").html(response.msg);
+                            $("#errorAlert").fadeIn();
+                        }
+                    },
+                    error: function (response) {
+                        // $("#errorAlert").html(response.responseText);
+                        $("#errorAlert").html("We encounter a problem when logging your account. Contact developer for more info");
+                        $("#errorAlert").show();
+                        console.log(response.responseText);
+                    }
+                });
+            });
+
+            $("#forgotPasswordForm").submit(function (event) {
+                event.preventDefault();
+                let userType = $("[name='userType']:checked").val();
+                $.ajax({
+                    url: "process/general.process.php",
+                    type: "post",
+                    data: {
+                        email: $("#fpEmail").val(),
+                        'forgot-password': userType
+                    },
+                    dataType: "JSON",
+                    beforeSend: function () {
+                        $("#fPSpinner").show();
+                        $("#forgotbtn").attr("disabled", "disabled");
+                    },
+                    success: function (response) {
+                        if (response.status) {
+                            $("#successAlertFP").fadeIn();
+                            $("#successAlertFP").html(response.msg);
+                            $("#errorAlertFP").hide();
+                            $("#forgotPasswordForm").trigger("reset");
+                        } else {
+                            $("#errorAlertFP").fadeIn();
+                            $("#errorAlertFP").html(response.msg);
+                            $("#successAlertFP").hide();
+                        }
+                        $("#fPSpinner").hide();
+                        $("#forgotbtn").removeAttr("disabled");
+                    }, error: function (response) {
+                        console.error(response);
+                    }
+                });
+            });
+        });
+
+    </script>
+</body>
+
+</html>

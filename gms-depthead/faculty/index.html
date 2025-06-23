@@ -1,0 +1,341 @@
+<link rel="stylesheet" href="../faculty/style.faculty.css">
+<link rel="icon" href="images/CvsuSilang1.jpg" type="image/jpg" sizes="16x16">
+<main>
+    <header class="">
+        <div id="header-title" class="d-flex justify-content-between">
+            <h3>Faculty</h3>
+            <div class="btn-group d-print-none" role="group">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><button class="dropdown-item" id="uploadFileBtn">Upload Excel File</button></li>
+                        <li><button class="dropdown-item" onclick="window.print()">Print</button></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addFacultyModal">Add
+                    New Faculty</button>
+            </div>
+        </div>
+    </header>
+    <div class="mb-3">
+        <h3>List of Faculty</h3>
+        <div class="mx-3">
+            <div id="error"></div>
+
+            <table class="table table-light shadow-sm  table-bordered table-striped table-hover" id="facultiesTable">
+                <thead>
+                    <tr>
+                        <th>Faculty ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Contact No</th>
+                    </tr>
+                </thead>
+                <tbody id="facultyRecords"></tbody>
+            </table>
+        </div>
+    </div>
+    <h3>Inactive Faculty</h3>
+    <div class="mx-3">
+        <table class="table table-light shadow-sm  table-bordered table-striped table-hover" id="blockedFacultiesTable">
+            <thead>
+                <tr>
+                    <th>Faculty ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Contact No</th>
+                    <th>Deactive</th>
+                </tr>
+            </thead>
+            <tbody id="blockedFacultyRecords">
+
+            </tbody>
+        </table>
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="alert"
+                aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body"></div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- File Upload Modal -->
+<form id="fileUploadForm" enctype="multipart/form-data">
+    <input type="file" name="fileUpload" id="fileUpload" accept=".xlsx, .xls, .csv" class="d-none">
+</form>
+<div class="modal fade" id="fileUploadModal" tabindex="-1" aria-labelledby="fileUploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="fileUploadModalLabel">Excel Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="previewSpinner">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="container-fluid" id="fileUploadBody">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="upload"><span id="updloadLabel">Upload</span> <span
+                        class="spinner-border spinner-border-sm" id="uploadSpinner" role="status"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Faculty Modal -->
+<div class="modal fade" id="addFacultyModal" tabindex="-1" aria-labelledby="addFacultyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Faculty</h5>
+                <button type="button" class="btn-close" data-bs-target="#addFacultyModal"
+                    data-bs-toggle="modal"></button>
+            </div>
+            <form id="addFacultyForm">
+                <div class="modal-body">
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-firstName" class="form-label">* First Name</label>
+                                <input type="text" class="form-control" name="add-firstName" id="add-firstName"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-middleName" class="form-label">Middle Name</label>
+                                <input type="text" class="form-control" name="add-middleName" id="add-middleName">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-lastName" class="form-label">* Last Name</label>
+                                <input type="text" class="form-control" name="add-lastName" id="add-lastName" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-email" class="form-label">* Email address</label>
+                                <input type="email" class="form-control" name="add-email" id="add-email" required email>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-contactNo" class="form-label">Contact Number</label>
+                                <input type="text" class="form-control" name="add-contactNo" id="add-contactNo">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="add-facultyNo" class="form-label">* Faculty ID</label>
+                                <input type="text" class="form-control" name="add-facultyNo" id="add-facultyNo"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="subCtr" id="subCtr" value="1">
+                    <div id="add-facultySubjects">
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label for="add-subject-1" class="form-label">Subject</label>
+                                    <select class="form-select mb-3" name="subject[1]" id="add-subject-1" required>
+                                        <option value="General" selected>CAP 301</option>
+                                        <option value="Business Analytics">CAP 401</option>
+                                        <option value="Web Development">IT 104</option>
+                                        <option value="Service Management">IT 103 Computer Programming 1</option>
+                                        <option value="Service Management">IT 102</option>
+                                        <option value="Service Management">NSTP 1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="mb-3">
+                                    <label for="add-sections-1" class="form-label">Class Sections</label>
+                                    <input type="text" class="form-control" name="sections[1]" id="add-sections-1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-dark w-100" id="add-subject">Add Subject</button>
+
+                    <div class="alert alert-danger py-1 mt-2" role="alert" id="addNewFacultyError">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#addFacultyModal"
+                        data-bs-toggle="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="addFacultyBtn"><span id="addLabel">Add New
+                            Faculty</span> <span class="spinner-border spinner-border-sm" id="addFacultySpinner"
+                            role="status"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- VIEW FACULTY MODAL -->
+<div class="modal fade bg-dark" id="viewFacultyModal" tabindex="-1" aria-labelledby="viewFacultyLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title"><i class="fal fa-hashtag"></i> <span id="view-facultyID"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="px-4">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-3">
+                            <img id="view-profile" class="img-fluid rounded-circle border p-2">
+                        </div>
+                        <div class="col ">
+                            <h2 class="mb-2"><span id="view-fullName"></span></h2>
+                            <div class="mb-1"><i class="fal fa-envelope me-2"></i> <span id="view-email"></span></div>
+                            <div class="mb-1"><i class="far fa-phone-alt me-2"></i> <span id="view-contactNo"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="offset-3 g-3">
+                    <h5>Handled Subjects</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr class="table-dark">
+                                <th>Subject Code</th>
+                                <th>Description</th>
+                                <th>Class Section</th>
+                            </tr>
+                        </thead>
+                        <tbody id="view-subjects">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer d-print-none">
+                <button class="btn btn-danger px-3 " data-bs-target="#removeFacultyModal" data-bs-toggle="modal"><i
+                        class="fal fa-trash"></i> Remove</button>
+                <button class="btn btn-dark px-4" onclick="window.print()"><i class="fal fa-print"></i>
+                    Print</button>
+                <button class="btn btn-dark px-3" data-bs-target="#editFacultyModal" data-bs-toggle="modal"><i
+                        class="fal fa-edit"></i> Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE FACULTY MODAL -->
+<div class="modal fade py-5" tabindex="-1" id="removeFacultyModal">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body p-4 text-center">
+                <h5 class="">Remove <span id="remove-fullName"></span></h5>
+                <p class="mb-1">Are you sure you want to remove faculty <span id="remove-facultyID" class="h5"></span>?
+                </p>
+                <p class="mb-0 text-danger fw-bolder">*This action is cannot be undone!
+                </p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" id="remove-yes-btn"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                    data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div><!-- END OF DELETE FACULTY MODAL -->
+
+<!-- Edit Faculty Modal -->
+<div class="modal fade" id="editFacultyModal" tabindex="-1" aria-labelledby="editFacultyLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Faculty</h5>
+                <button type="button" class="btn-close" data-bs-target="#editFacultyModal"
+                    data-bs-toggle="modal"></button>
+            </div>
+            <form id="editFacultyForm">
+                <input type="hidden" name="edit-oldFacultyID" id="edit-oldFacultyID">
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col col-md-4">
+                            <div class="mb-3">
+                                <label for="edit-facultyID" class="form-label">* Faculty Number</label>
+                                <input type="text" class="form-control" name="edit-facultyID" id="edit-facultyID">
+                            </div>
+                        </div>
+                        <div class="col col-md-8">
+                            <div class="mb-3">
+                                <label for="edit-fullName" class="form-label">* Full Name</label>
+                                <input type="text" class="form-control" name="edit-fullName" id="edit-fullName"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-email" class="form-label">* Email address</label>
+                                <input type="email" class="form-control" name="edit-email" id="edit-email" required
+                                    email>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-contactNo" class="form-label">Contact Number</label>
+                                <input type="text" class="form-control" name="edit-contactNo" id="edit-contactNo">
+                            </div>
+                        </div>
+
+                    </div>
+                    <input type="hidden" name="edit-subCtr" id="edit-subCtr" value="1">
+                    <div id="edit-facultySubjects">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-dark w-100" id="edit-subject">Add Subject</button>
+
+                    <div class="alert alert-danger py-1 mx-2" role="alert" id="editNewFacultyError">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#editFacultyModal"
+                        data-bs-toggle="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="editFacultyBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../faculty/script.faculty.js"></script>

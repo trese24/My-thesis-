@@ -1,0 +1,35 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css");
+@import url("https://pro.fontawesome.com/releases/v5.10.0/css/all.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald&display=swap");
+@import url("https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css");
+
+.bg-brown {
+    background-color: rgb(92, 226, 136) !important;
+}
+
+.text-bg-brown {
+    background-color: rgb(92, 226, 136) !important;
+    color: white;
+}
+
+.table-red {
+    background-color: rgb(92, 226, 136) !important;
+    border-color: #373b3e;
+    color: #fff;
+}
+
+.bg-red {
+    background-color: rgb(92, 226, 136)1 !important;
+}
+
+.text-bg-red {
+    background-color: rgb(92, 226, 136) !important;
+    color: white;
+}
+
+.dash-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(87, 56, 0) !important;
+}

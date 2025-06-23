@@ -1,0 +1,8 @@
+.carousel-control-next,
+.carousel-control-prev {
+    width: 50px;
+    font-size: 10px;
+    height: 50px;
+    top: 45%;
+    opacity: 0.2;
+}

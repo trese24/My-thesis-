@@ -1,0 +1,11 @@
+.blockquote {
+    padding: 20px ;
+    position: relative;
+    margin: 0px;
+}
+.blockquote p {
+    font-family: "Utopia-italic";
+    font-size: 25px;
+    font-weight: 700px;
+    text-align: center;
+}

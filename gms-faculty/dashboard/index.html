@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="../dashboard/style.dashboard.css">
+<main>
+    <header>
+        <div id="header-title" class="h3">Dashboard</div>
+    </header>
+
+    <div id="error" class="alert alert-danger py-1 d-none"></div>
+    <div class="row gx-2 mx-0 mb-2">
+        <div class="col-4 h-100">
+            <!-- CHART #1: Total Handled Student and per year level -->
+            <div class="shadow-sm px-3 py-4 bg-white mb-2">
+                <div class="row">
+                    <div class="col">
+                        <div class="dash-title">Students</div>
+                        <div id="studentCount" class="h1 fw-bold mt-1">
+                            0
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="ms-auto" style="width: 100px;">
+                            <canvas id="studentsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHART #2: Passing Rate all student -->
+            <div class="shadow-sm px-3 py-4 bg-white">
+                <div class="row h-100">
+                    <div class="col">
+                        <div class="dash-title">PASSING RATE</div>
+                        <div class="dash-title" id="subCode">AAP 101</div>
+                        <div class="d-flex">
+                            <div class="me-3">
+                                Passed
+                                <div id="prPassed" class="h5">0%</div>
+                            </div>
+                            <div>
+                                Failed
+                                <div id="prFailed" class="h5">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="ms-auto" style="width: 100px;">
+                            <canvas id="passingRateChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div class="shadow-sm px-3 pt-4 pb-3 bg-white">
+                <div class="d-flex justify-content-between">
+                    <div class="dash-title">Grade Criteria Average</div>
+                    <div>
+                        <select class="form-select mb-3" id="filter-subject" style="width: auto;">
+                        </select>
+                    </div>
+                </div>
+                <div style="height: 223px;">
+                    <canvas id="gradeCriteriaAverageChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="topInSubjectCarousel" class="carousel slide mb-2" data-bs-ride="true">
+        <div class="carousel-inner" id="topInSubjectContent">
+        </div>
+        <button class="carousel-control-prev bg-dark rounded-circle p-3" type="button"
+            data-bs-target="#topInSubjectCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next bg-dark rounded-circle p-3" type="button"
+            data-bs-target="#topInSubjectCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="shadow-sm px-3 pt-4 pb-3 bg-white">
+        <div class="d-flex justify-content-between">
+            <div class="dash-title">Unofficial Drop Student</div>
+        </div>
+        <table class="table table-sm table-stripped table-bordered text-center compact display"
+            style="font-size: 14px;" id="dropStudentTable">
+            <thead class="table-red">
+                <tr>
+                    <th class="text-center">Student No.</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Subject Code</th>
+                    <th class="text-center">Subject Description</th>
+                    <th class="text-center">Section</th>
+                    <th  class="text-center">Grade</th>
+                    <th class="text-center">Equiv</th>
+                </tr>
+            </thead>
+            <tbody id="dropStudentContent">
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- LOADING SCREEN -->
+    <div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+          <div class="spinner-border d-block mx-auto text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
+    </div>
+    
+    <script src="../dashboard/script.dashboard.js"></script>

@@ -1,0 +1,261 @@
+<link rel="stylesheet" href="../subject/style.subject.css">
+<main>
+    <header class="">
+        <div id="header-title" class="d-flex justify-content-between">
+            <h3>Subject</h3>
+            <div class="d-print-none">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Add
+                    New Subject</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mx-3 mb-5">
+        <div class="d-flex justify-content-start mb-3">
+            <div class="me-3">
+                <label for="year_sem">Year and Semester</label>
+                <select class="form-select" id="year_sem">
+                    <option value="All" selected>All</option>
+                    <option value="1-1">1ST YEAR - 1ST SEMESTER</option>
+                    <option value="1-2">1ST YEAR - 2ND SEMESTER</option>
+                    <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                    <option value="2-1">2ND YEAR - 1ST SEMESTER</option>
+                    <option value="2-2">2ND YEAR - 2ND SEMESTER</option>
+                    <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                    <option value="3-1">3RD YEAR - 1ST SEMESTER</option>
+                    <option value="3-2">3RD YEAR - 2ND SEMESTER</option>
+                    <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                    <option value="4-1">4TH YEAR - 1ST SEMESTER</option>
+                    <option value="4-2">4TH YEAR - 2ND SEMESTER</option>
+                </select>
+            </div>
+            <!-- <div>
+                <label for="specialization">Specialization</label>
+                <select class="form-select" id="specialization">
+                    <option value="All" selected>All</option>
+                    <option value="General">General</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Business Analytics">Business Analytics</option>
+                    <option value="Service Management">Service Management</option>
+
+                </select>
+            </div> -->
+        </div>
+
+        <table class="table table-light shadow-sm table-bordered table-striped table-sm display compact"
+            id="allSubjectTable">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Year & Semester</th>
+                    <th>Lec Units</th>
+                    <th>Lab Units</th>
+                    <th>Total Units</th>
+                    <th>Hours Per Week</th>
+                    <th>Prereq</th>
+                    <th>Co-req</th>
+                    <th>Action</th>
+
+                </tr>
+            </thead>
+            <tbody id="subject_tdata">
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-danger d-none" id="errorAlert"></div>
+
+</main>
+
+<!-- View/Edit Subject -->
+<div class="modal fade" id="viewSubjectModal" tabindex="-1" aria-labelledby="viewSubjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="d-none" id="oldSubjectCode"></span>
+                <h5>Edit <span id="editCode"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="editSubjectForm">
+                <input type="hidden" name="editID">
+                <div class="modal-body">
+                    <div class="row g-2 mb-2">
+                        <div class="col-4">
+                            <label for="editCode" class="form-label">Code</label>
+                            <input type="text" class="form-control" name="editCode" id="editCode" required>
+                        </div>
+                        <div class="col">
+                            <label for="editDescription" class="form-label">Description</label>
+                            <input type="text" class="form-control" name="editDescription" id="editDescription"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="editSpecialization" class="form-label">Specialization</label>
+                            <select class="form-select" name="editSpecialization" id="editSpecialization" required>
+                                <option value="General">General</option>
+                                <option value="Web Development">Web Development</option>
+                                <option value="Business Analytics">Business Analytics</option>
+                                <option value="Service Management">Service Management</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="editYearLevel" class="form-label">Year Level</label>
+                            <select class="form-select" name="editYearSem" id="editYearSem" required>
+                                <option value="1-1">1ST YEAR - 1ST SEMESTER</option>
+                                <option value="1-2">1ST YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="2-1">2ND YEAR - 1ST SEMESTER</option>
+                                <option value="2-2">2ND YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="3-1">3RD YEAR - 1ST SEMESTER</option>
+                                <option value="3-2">3RD YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="4-1">4TH YEAR - 1ST SEMESTER</option>
+                                <option value="4-2">4TH YEAR - 2ND SEMESTER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="editLecUnits" class="form-label">Lec Units</label>
+                            <input type="number" min="0" value="0" class="form-control" name="editLecUnits"
+                                id="editLecUnits">
+                        </div>
+                        <div class="col">
+                            <label for="editLabUnits" class="form-label">Lab Units</label>
+                            <input type="number" min="0" value="0" class="form-control" name="editLabUnits"
+                                id="editLabUnits">
+                        </div>
+                        <div class="col">
+                            <label for="editHoursPerWeek" class="form-label">Hours per Week</label>
+                            <input type="number" min="0" value="0" class="form-control" name="editHoursPerWeek"
+                                id="editHoursPerWeek">
+                        </div>
+                        <div class="col">
+                            <label for="editPrereq" class="form-label">Prereq</label>
+                            <input type="text" class="form-control" name="editPrereq" id="editPrereq">
+                        </div>
+                        <div class="col">
+                            <label for="editCoReq" class="form-label">Co-Req</label>
+                            <input type="text" class="form-control" name="editCoReq" id="editCoReq">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="editSaveChanges">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- END OF View/Edit Subject MODAL -->
+
+<!-- DELETE SUBJECT MODAL -->
+<div class="modal fade py-5" tabindex="-1" id="removeSubjectModal">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body p-4 text-center">
+                <h5 class="">Remove Subject</h5>
+                <p class="mb-1">Are you sure you want to remove subject <span id="removeCode" class="h5">Comp 113
+                        IT</span>?</p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" id="remove-yes-btn"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                    data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div><!-- END OF DELETE SUBJECT MODAL -->
+
+<!-- Add new Subject Modal-->
+<div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Add New Subject</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="addSubjectForm">
+                <div class="modal-body">
+                    <div class="row g-2 mb-2">
+                        <div class="col-4">
+                            <label for="addCode" class="form-label">Code</label>
+                            <input type="text" class="form-control" name="addCode" id="addCode" required>
+                        </div>
+                        <div class="col">
+                            <label for="addDescription" class="form-label">Description</label>
+                            <input type="text" class="form-control" name="addDescription" id="addDescription" required>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            
+                        </div>
+                        <div class="col">
+                            <label for="addYearLevel" class="form-label">Year Level</label>
+                            <select class="form-select" name="addYearSem" id="addYearSem" required>
+                                <option value="1-1">1ST YEAR - 1ST SEMESTER</option>
+                                <option value="1-2">1ST YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="2-1">2ND YEAR - 1ST SEMESTER</option>
+                                <option value="2-2">2ND YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="3-1">3RD YEAR - 1ST SEMESTER</option>
+                                <option value="3-2">3RD YEAR - 2ND SEMESTER</option>
+                                <option style="font-size: 1pt; background-color: #e4e4e4;" disabled>&nbsp;</option>
+                                <option value="4-1">4TH YEAR - 1ST SEMESTER</option>
+                                <option value="4-2">4TH YEAR - 2ND SEMESTER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="addLecUnits" class="form-label">Lec Units</label>
+                            <input type="number" min="0" value="0" class="form-control" name="addLecUnits"
+                                id="addLecUnits">
+                        </div>
+                        <div class="col">
+                            <label for="addLabUnits" class="form-label">Lab Units</label>
+                            <input type="number" min="0" value="0" class="form-control" name="addLabUnits"
+                                id="addLabUnits">
+                        </div>
+                        <div class="col">
+                            <label for="addHoursPerWeek" class="form-label">Hours per Week</label>
+                            <input type="number" min="0" value="0" class="form-control" name="addHoursPerWeek"
+                                id="addHoursPerWeek">
+                        </div>
+                        <div class="col">
+                            <label for="addPrereq" class="form-label">Prereq</label>
+                            <input type="text" class="form-control" name="addPrereq" id="addPrereq">
+                        </div>
+                        <div class="col">
+                            <label for="addCoReq" class="form-label">Co-Req</label>
+                            <input type="text" class="form-control" name="addCoReq" id="addCoReq">
+                        </div>
+                    </div>
+                    <div class="alert alert-danger py-1 mt-2" role="alert" id="addSubjectError">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="addNewSubjectBtn">Add New Subject</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> <!-- Add New Subject MODAL -->
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+<script src="../subject/script.subject.js"></script>

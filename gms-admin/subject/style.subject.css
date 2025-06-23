@@ -1,0 +1,17 @@
+/* #subject_tdata > tr {
+    cursor: pointer;
+} */
+
+.remove-faculty {
+    background: #dc3545 !important;
+    cursor: pointer;
+}
+
+.remove-faculty:hover {
+    background: #b82f3c !important;
+}
+
+th.dt-center,
+td.dt-center {
+    text-align: center;
+}

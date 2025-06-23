@@ -1,0 +1,75 @@
+<main>
+    <header>
+        <div id="header-title" class="h3">Profile</div>
+    </header>
+
+    <div id="error" class="alert alert-danger py-1 d-none"></div>
+
+    <form id="profileForm" class="mt-3 ms-3">
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <div class="text-center mb-3">
+                    <img id="profile_picture" class="border rounded-circle" style="height: 100px;">
+                    <input type="file" class="form-control form-control-sm mt-2 d-print-none mx-auto" name="profile"
+                        accept="image/*" style="width: 200px;" id="changeProfileBtn">
+                    <input type="hidden" name="old_profile" id="old_profile">
+                </div>
+            </div>
+            <h5>Employee ID: <span id="empID"></span></h5>
+            <div class="col-12 col-md-5">
+                <div class="mb-3">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" name="fullName" id="fullName" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="contactNo">Contact Number:</label>
+                    <input type="text" name="contactNo" id="contactNo" class="form-control">
+                </div>
+            </div>
+            <div class="col-12 col-md-5">
+                <div class="mb-3">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" class="form-control">
+                </div>
+                <label for="password">Password</label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" id="password" name="password" minlength="8" required
+                        autocomplete="off">
+                    <button class="btn btn-dark" type="button" id="changePassBtn" data-bs-toggle="collapse" data-bs-target="#pass"><i
+                            class="fal fa-edit"></i></button>
+                </div>
+                <div id="pass" class="collapse">
+                    <div class="mb-3">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword"
+                            placeholder="Password" minlength="8" required disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword">Re-type New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword"
+                            placeholder="Password" required disabled>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-12 col-md-10 text-center">
+                <div class="alert alert-success mt-2 py-2 text-center d-none" role="alert" id="successAlert">
+                    Successfully Updated
+                </div>
+                <div class="alert alert-danger mt-2 py-2 text-center d-none" role="alert" id="errorAlert">
+
+                </div>
+                <input type="submit" class="btn btn-success px-3" value="Save Changes">
+            </div>
+        </div>
+
+
+    </form>
+</main>
+
+
+<script src="../profile/script.profile.js"></script>

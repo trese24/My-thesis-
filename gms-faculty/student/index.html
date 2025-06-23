@@ -1,0 +1,263 @@
+<link rel="stylesheet" href="../student/style.student.css">
+<main>
+    <header class="">
+        <div id="header-title" class="d-flex justify-content-between">
+            <h3>Student</h3>
+            <!-- <div class="btn-group d-print-none" role="group">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><button class="dropdown-item" id="uploadFileBtn">Upload Excel File</button></li>
+                        <li><button class="dropdown-item" onclick="window.print()">Print</button></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add
+                    New Student</button>
+            </div> -->
+        </div>
+    </header>
+
+    <div class="me-2">
+        <div id="error"></div>
+        <div class="shadow-sm bg-white p-3 my-2">
+            <div class="h5 dash-title">Filter</div>
+            <div class="row row-cols-4 g-2">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="filter-subject" class="form-label">Subject</label>
+                        <select class="form-select mb-3" name="filter-subject" id="filter-subject" required>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="filter-section" class="form-label">Section</label> <span
+                            class="spinner-border spinner-border-sm" id="filter-section-spinner" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </span>
+                        <select class="form-select mb-3" name="filter-section" id="filter-section" required>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="shadow-sm bg-white p-3">
+
+
+            <table class="table table-bordered table-striped table-hover compact display" id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>Student No</th>
+                        <th>Full Name</th>
+                        <th>Section</th>
+                        <th>Email</th>
+                        <th>Contact No</th>
+                    </tr>
+                </thead>
+                <tbody id="studentRecords">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- VIEW STUDENT MODAL -->
+<div class="modal fade bg-dark" id="viewStudentModal" tabindex="-1" aria-labelledby="viewStudentLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title"><i class="fal fa-hashtag"></i> <span id="view-studentNo"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="px-4">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-3">
+                            <img id="view_profile" src="../../images/defaultUserImage.jpg"
+                                class="img-fluid rounded-circle border p-2">
+                        </div>
+                        <div class="col ">
+                            <h2 class="mb-2"><span id="view-fullName"></span></h2>
+                            <div class="mb-1"><i class="fal fa-envelope me-2"></i> <span id="view-email"></span></div>
+                            <div class="mb-1"><i class="far fa-phone-alt me-2"></i> <span id="view-contactNo"></span>
+                            </div>
+                            <div class="mb-1"><i class="fad fa-venus-mars me-2"></i> <span id="view-gender"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="offset-3 g-3">
+                    <div class="row row-cols-4 g-2 mb-3">
+                        <div class="col"><b>School year: </b></div>
+                        <div class="col" id="view-specialization"></div>
+                        <div class="col"><b>Program:</b></div>
+                        <div class="col" id="view-program"></div>
+                        <div class="col"><b>Level:</b></div>
+                        <div class="col" id="view-level"></div>
+                        <div class="col"><b>Class Section:</b></div>
+                        <div class="col" id="view-section"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer d-print-none">
+                <button class="btn btn-dark px-4" onclick="window.print()"><i class="fal fa-print"></i>
+                    Print</button>
+                <!-- <button class="btn btn-dark px-3" data-bs-target="#editStudentModal"
+                    data-bs-toggle="modal"><i class="fal fa-edit"></i> Edit</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE STUDENT MODAL -->
+<div class="modal fade py-5" tabindex="-1" id="removeStudentModal">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-3">
+            <div class="modal-body p-4 text-center">
+                <h5 class="">Remove <span id="remove-fullName"></span></h5>
+                <p class="mb-1">Are you sure you want to remove student <span id="remove-studentNo" class="h5"></span>?
+                </p>
+                <p class="mb-0 text-danger fw-bolder">*This action is cannot be undone!
+                </p>
+            </div>
+            <div class="modal-footer flex-nowrap p-0">
+                <button type="button" id="remove-yes-btn"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end"><strong>Yes</strong></button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
+                    data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div><!-- END OF DELETE STUDENT MODAL -->
+
+<!-- Edit Student Modal -->
+<div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Student</h5>
+                <button type="button" class="btn-close" data-bs-target="#editStudentModal"
+                    data-bs-toggle="modal"></button>
+            </div>
+            <form id="editStudentForm">
+                <input type="hidden" name="edit-oldStudentNo" id="edit-oldStudentNo">
+                <div class="modal-body">
+                    <div class="row g-2">
+                        <div class="col col-md-4">
+                            <div class="mb-3">
+                                <label for="edit-studentNo" class="form-label">* Student Number</label>
+                                <input type="text" class="form-control" name="edit-studentNo" id="edit-studentNo">
+                            </div>
+                        </div>
+                        <div class="col col-md-8">
+                            <div class="mb-3">
+                                <label for="edit-fullName" class="form-label">* Full Name</label>
+                                <input type="text" class="form-control" name="edit-fullName" id="edit-fullName"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-email" class="form-label">* Email address</label>
+                                <input type="email" class="form-control" name="edit-email" id="edit-email" required
+                                    email>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-contactNo" class="form-label">Contact Number</label>
+                                <input type="text" class="form-control" name="edit-contactNo" id="edit-contactNo">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="male" class="form-label">* Gender</label><br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edit-gender" id="male"
+                                        value="Male" required>
+                                    <label class="form-check-label" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edit-gender" id="female"
+                                        value="Female">
+                                    <label class="form-check-label" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 g-2">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-specialization" class="form-label">* School year</label>
+                                <input type="text" class="form-control mb-3" name="add-specialization" id="add-specialization" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-program" class="form-label">* Program</label>
+                                <input type="text" class="form-control" name="edit-program" id="edit-program" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="edit-level" class="form-label">* Year Level</label>
+                                <select class="form-select mb-3" name="edit-level" id="edit-level" required>
+                                    <option value="1st Year" selected>1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                    <option value="4th Year">4th Year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="edit-section" class="form-label">* Class Section</label>
+                                <input type="text" class="form-control" name="edit-section" id="edit-section" required>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="edit-subjects" class="form-label">* Subjects</label>
+                                <input type="text" class="form-control" name="edit-subjects" id="edit-subjects"
+                                    required>
+                                <div class="form-text">Subject Code (Separeted with comma)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger pt-1" role="alert" id="editNewStudentError">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#editStudentModal"
+                        data-bs-toggle="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="editStudentBtn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- LOADING SCREEN -->
+<div class="modal" id="loadingScreen" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+        <div class="spinner-border d-block mx-auto text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>
+
+<script src="../student/script.student.js"></script>

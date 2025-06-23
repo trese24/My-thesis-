@@ -1,0 +1,7 @@
+#studentRecords > tr {
+    cursor: pointer;
+}
+
+#studentsTable {
+    background-color: white;
+}
